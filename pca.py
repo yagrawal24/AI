@@ -81,5 +81,19 @@ def display_image(orig, proj):
     fig.colorbar(pos2, ax=ax2)
 
     plt.show()
+    
+def main():
+    print("Input number between 1 and 1024 (inclusive) for dimension")
+    dim = int(input())
+    print("Input number between 0 and 2413 (inslusive) for picture from dataset")
+    pic = int(input())
+    x = load_and_center_dataset('YaleB_32x32.npy')
+    S = get_covariance(x)
+    Lambda, U = get_eig(S, dim)
+    projection = project_image(x[pic], U)
+    display_image(x[pic], projection)
 
+
+if __name__ == '__main__':
+    main()
 
